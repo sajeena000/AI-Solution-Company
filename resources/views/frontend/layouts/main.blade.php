@@ -9,6 +9,8 @@
 </div>
 @endif
 
+@include('frontend.layouts.chat')
+
 @include('frontend.layouts.footer')
 
 
