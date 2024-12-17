@@ -29,6 +29,8 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('admin/css/style.css')}}" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.3.2/ckeditor.js" integrity="sha512-dChQkpVHM53sBTfhGA2O+4GSNA6L2Sc2r2CJrc4RjNPyKkuDFX5ZgxiW8O4li8IlUyZCCVMLiNwtpzrIz8vIqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>

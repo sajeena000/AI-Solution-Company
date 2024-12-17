@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Contact;
+use App\Models\Event;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -42,12 +43,12 @@ class HomeController extends Controller
             ]);
 
             $contact = new Contact();
-            $contact->name  = $request->name;
-            $contact->email  = $request->email;
-            $contact->phone  = $request->phone;
-            $contact->company  = $request->company;
-            $contact->country   = $request->country;   
-            $contact->job_title = $request->job_title; 
+            $contact->name = $request->name;
+            $contact->email = $request->email;
+            $contact->phone = $request->phone;
+            $contact->company = $request->company;
+            $contact->country = $request->country;
+            $contact->job_title = $request->job_title;
             $contact->job_details = $request->job_details;
             $contact->save();
 
@@ -61,20 +62,41 @@ class HomeController extends Controller
         return view('frontend.pages.contact');
     }
 
-    
     public function project()
     {
         $projects = Project::orderBy('year', 'DESC')->get();
         return view('frontend.pages.project', compact('projects'));
     }
-    public function blogGrid()
+
+    public function blogs()
     {
         $blogs = Blog::where('status', true)->orderBy('created_at', 'DESC')->paginate(6);
-        return view('frontend.pages.blog-grid', compact('blogs'));
+        return view('frontend.pages.blogs', compact('blogs'));
     }
-    public function blogSidebar()
+
+    public function blogDetail($id)
     {
-        return view('frontend.pages.blog-sidebar');
+        $blog = Blog::where('id', $id)->where('status', true)->first();
+        if (!$blog) {
+            abort(404);
+        }
+
+        $previousBlog = Blog::where('status', true)->where('id', '<', $id)->first();
+        $nextBlog = Blog::where('status', true)->where('id', '>', $id)->first();
+
+        $latestBlogs = Blog::where('status', true)->whereNot('id', $id)->limit(3)->get();
+
+        return view('frontend.pages.blog-single', compact('blog', 'latestBlogs', 'nextBlog', 'previousBlog'));
+    }
+
+    public function events()
+    {
+        $events = Event::orderBy('date', 'DESC')->paginate(6);
+        $upcomingEvents = Event::where('date', '>=', now())->orderBy('date', 'ASC')->take(3)->get();
+
+        $latestEvents = Event::orderBy('date', 'DESC')->take(3)->get();
+
+        return view('frontend.pages.events', compact('events', 'upcomingEvents', 'latestEvents'));
     }
     public function blogSingle()
     {

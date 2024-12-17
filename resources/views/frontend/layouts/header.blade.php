@@ -111,9 +111,9 @@
                   <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">News & Events <i class="fas fa-chevron-down small"></i></a>
 
                   <ul class="dropdown-menu" aria-labelledby="dropdown05">
-                    <li><a class="dropdown-item @@blogGrid" href="{{ route('frontend.blog-grid')}}">Latest Blogs</a></li>
-                    <li><a class="dropdown-item @@blogSidebar" href="{{ route('frontend.blog-sidebar')}}">Event Highlights</a></li>
-                    <li><a class="dropdown-item @@blogSingle" href="{{ route('frontend.blog-single')}}">Upcoming Events</a></li>
+                    <li><a class="dropdown-item @@blogGrid" href="{{ route('frontend.blogs')}}">Latest Blogs</a></li>
+                    <li><a class="dropdown-item @@blogSidebar" href="{{ route('frontend.events')}}">Event Highlights</a></li>
+                    {{-- <li><a class="dropdown-item @@blogSingle" href="{{ route('frontend.blog-single')}}">Upcoming Events</a></li> --}}
       
                     {{-- <li class="dropdown dropdown-submenu dropleft">
                       <a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0501" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu</a>

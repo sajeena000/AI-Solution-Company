@@ -72,5 +72,18 @@
             </div>
         </div>
     </div>
-    <!-- Edit Blog Form End -->
+
+    <script>
+        CKEDITOR.replace( 'content', {
+            toolbar: [
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+            { name: 'insert', items: ['Link'] },
+            { name: 'styles', items: ['Format'] },
+            { name: 'colors', items: ['TextColor', 'BGColor'] },
+            { name: 'undo', items: ['Undo', 'Redo'] }
+        ],
+            height: 300
+        } );
+    </script>
 @endsection

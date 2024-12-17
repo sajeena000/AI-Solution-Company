@@ -16,9 +16,11 @@ Route::get('/about',[HomeController::class,'about'])->name('frontend.about');
 Route::get('/pricing',[HomeController::class,'pricing'])->name('frontend.pricing');
 Route::get('/service',[HomeController::class,'service'])->name('frontend.service');
 Route::get('/project',[HomeController::class,'project'])->name('frontend.project'); //Portfolio
-Route::get('/blog-grid',[HomeController::class,'blogGrid'])->name('frontend.blog-grid');
-// Route::get('/blog/{id}', [HomeController::class, 'blogSingle'])->name('frontend.blogs.show');
+Route::get('/blogs',[HomeController::class,'blogs'])->name('frontend.blogs');
+Route::get('/blogs/{id}', [HomeController::class, 'blogDetail'])->name('frontend.blogs.detail');
 Route::get('/blog-sidebar',[HomeController::class,'blogSidebar'])->name('frontend.blog-sidebar');
+Route::get('/events',[HomeController::class,'events'])->name('frontend.events');
+
 Route::get('/blog-single',[HomeController::class,'blogSingle'])->name('frontend.blog-single');
 Route::match(['GET', 'POST'],'/contact',[HomeController::class,'contact'])->name('frontend.contact');
 
