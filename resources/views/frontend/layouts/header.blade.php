@@ -104,6 +104,8 @@
                   </ul>
                 </li>
                 <li class="nav-item @@service"><a class="nav-link" href="{{ route('frontend.service')}}">Services</a></li>
+                <li class="nav-item @@galley"><a class="nav-link" href="{{ route('frontend.gallery')}}">Gallery</a></li>
+
 
                 <li class="nav-item @@project"><a class="nav-link" href="{{ route('frontend.project')}}">Portfolio</a></li>
                 <li class="nav-item dropdown @@blog">

@@ -16,7 +16,6 @@ class HomeController extends Controller
     {
         return view('frontend.pages.home');
     }
-
     public function about()
     {
         return view('frontend.pages.about');
@@ -28,6 +27,10 @@ class HomeController extends Controller
     public function service()
     {
         return view('frontend.pages.service');
+    }
+    public function gallery()
+    {
+        return view('frontend.pages.gallery');
     }
     public function contact(Request $request)
     {
