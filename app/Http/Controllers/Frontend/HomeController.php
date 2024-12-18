@@ -7,7 +7,9 @@ use App\Models\Blog;
 use App\Models\Contact;
 use App\Models\Event;
 use App\Models\Project;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -105,9 +107,21 @@ class HomeController extends Controller
         return view('frontend.pages.event-single', compact('event', 'upcomingEvents'));
     }
 
-    public function blogSingle()
+    public function chatResponse(Request $request)
     {
-        return view('frontend.pages.blog-single');
+        $contents = File::get(database_path('data\chatDataset.json'));
+        $data = json_decode(json: $contents, associative: true);
+
+        $query = $request->get('query');
+        $answer = '';
+
+        foreach ($data as $item) {
+            if (strtolower($item['query']) == strtolower($query)) {
+                $answer = $item['response'];
+                break;
+            }
+        }
+        return response()->json($answer);
     }
 }
 

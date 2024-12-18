@@ -24,11 +24,10 @@ Route::get('/blog-sidebar',[HomeController::class,'blogSidebar'])->name('fronten
 Route::get('/events',[HomeController::class,'events'])->name('frontend.events');
 Route::get('/events/{id}',[HomeController::class,'eventsDetail'])->name('frontend.events.detail');
 
-
-Route::get('/blog-single',[HomeController::class,'blogSingle'])->name('frontend.blog-single');
 Route::match(['GET', 'POST'],'/contact',[HomeController::class,'contact'])->name('frontend.contact');
 
-
+// chat route 
+Route::get('/chat-response', [HomeController::class, 'chatResponse'])->name('frontend.chat-response');
 
 
 
