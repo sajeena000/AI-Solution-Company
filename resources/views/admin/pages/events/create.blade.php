@@ -12,7 +12,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="title" class="form-label">Event Title</label>
-                            <input type="text" class="form-control" id="title" name="title">
+                            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
                             
                             @error('title')
                                 <span class="text-danger">{{ $message }} </span>
@@ -21,7 +21,7 @@
 
                         <div class="mb-3">
                             <label for="date" class="form-label">Date</label>
-                            <input type="date" class="form-control" id="date" name="date" required>
+                            <input type="date" class="form-control" id="date" name="date" value="{{ old('date') }}" required>
                             
                             @error('date')
                                 <span class="text-danger">{{ $message }} </span>
@@ -30,7 +30,7 @@
 
                         <div class="mb-3">
                             <label for="location" class="form-label">Location</label>
-                            <input type="text" class="form-control" id="location" name="location" required>
+                            <input type="text" class="form-control" id="location" name="location" value="{{ old('location') }}" required>
                             
                             @error('location')
                                 <span class="text-danger">{{ $message }} </span>
@@ -48,7 +48,7 @@
 
                         <div class="mb-3">
                             <label for="description" class="form-label">Event Description</label>
-                            <textarea class="form-control" id="description" name="description"></textarea>
+                            <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
                             
                             @error('description')
                                 <span class="text-danger">{{ $message }} </span>

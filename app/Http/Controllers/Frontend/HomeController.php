@@ -71,8 +71,6 @@ class HomeController extends Controller
         return view('frontend.pages.project', compact('projects'));
     }
 
-
-
     public function blogs()
     {
         $blogs = Blog::where('status', true)->orderBy('created_at', 'DESC')->paginate(6);
@@ -94,41 +92,18 @@ class HomeController extends Controller
         return view('frontend.pages.blog-single', compact('blog', 'latestBlogs', 'nextBlog', 'previousBlog'));
     }
 
+    public function events()
+    {
+        $events = Event::where('date', '>=', now()->startOfDay())->orderBy('date', 'ASC')->get();
+        return view('frontend.pages.events', compact('events'));
+    }
 
-
-   public function events()
-{
-    // Get all paginated events, ordered by most recent first
-    $events = Event::orderBy('date', 'DESC')->paginate(6);
-
-    // Get upcoming events (starting from today onward)
-    $upcomingEvents = Event::where('date', '>=', now()->startOfDay())
-                            ->orderBy('date', 'ASC')
-                            ->take(3)
-                            ->get();
-
-    // Get the latest events for the sidebar (most recent)
-    $latestEvents = Event::latest('date')->take(3)->get();
-
-    // Pass data to the view
-    return view('frontend.pages.events', compact('events', 'upcomingEvents', 'latestEvents'));
-}
-
-public function eventsDetail($id)
-{
-    // Retrieve the event by ID, or throw a 404 if not found
-    $event = Event::findOrFail($id);
-
-    // Get upcoming events for the sidebar
-    $upcomingEvents = Event::where('date', '>=', now()->startOfDay())
-                            ->orderBy('date', 'ASC')
-                            ->take(3)
-                            ->get();
-
-    // Pass the event and sidebar data to the view
-    return view('frontend.pages.event-single', compact('event', 'upcomingEvents'));
-}
-
+    public function eventsDetail($id)
+    {
+        $event = Event::findOrFail($id);
+        $upcomingEvents = Event::where('date', '>=', now()->startOfDay())->orderBy('date', 'ASC')->take(3)->get();
+        return view('frontend.pages.event-single', compact('event', 'upcomingEvents'));
+    }
 
     public function blogSingle()
     {

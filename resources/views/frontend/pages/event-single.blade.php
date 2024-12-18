@@ -26,13 +26,18 @@
       <div class="col-lg-8">
         <div class="single-event-item">
           <img loading="lazy" 
-               src="{{ $event->image ? Storage::url('events/' . $event->image) : asset('images/default-event.jpg') }}" 
+               src="{{ Storage::url('events/' . $event->image) }}" 
                alt="{{ $event->title }}" 
                class="img-fluid rounded mb-4">
+
           
           <div class="event-meta mb-4">
-            <span class="text-muted d-block mb-2"><i class="ti-calendar"></i> {{ \Carbon\Carbon::parse($event->date)->format('F d, Y') }}</span>
-            <span class="text-muted d-block"><i class="ti-location-pin"></i> {{ $event->location }}</span>
+            <span class="text-muted d-block mb-2">
+              <i class="ti-calendar"></i> {{ \Carbon\Carbon::parse($event->date)->format('F d, Y') }}
+            </span>
+            <span class="text-muted d-block">
+              <i class="ti-location-pin"></i> {{ $event->location }}
+            </span>
           </div>
 
           <h2 class="mb-4">{{ $event->title }}</h2>

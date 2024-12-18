@@ -32,16 +32,21 @@
 	  </div>
   
 	  <div class="row">
-		@if($upcomingEvents->isEmpty())
+		@if($events->isEmpty())
 			<p class="text-center w-100">No upcoming events at the moment.</p>
 		@else
-			@foreach($upcomingEvents as $upcomingEvent)
+			@foreach($events as $upcomingEvent)
 			<div class="col-lg-4 col-md-6 mb-5">
 			  <div class="event-item">
 				<img loading="lazy" 
+                 src="{{ Storage::url('events/' . $upcomingEvent->image) }}" 
+                  alt="{{ $upcomingEvent->title }}" 
+                  class="img-fluid rounded">
+
+				{{-- <img loading="lazy" 
                      src="{{ $upcomingEvent->image ? Storage::url('events/' . $upcomingEvent->image) : asset('images/default-event.jpg') }}" 
                      alt="{{ $upcomingEvent->title }}" 
-                     class="img-fluid rounded">
+                     class="img-fluid rounded"> --}}
 				<div class="event-item-content bg-white p-4">
 				  <div class="event-item-meta py-1 px-2">
 					<span class="text-muted text-capitalize mr-3">
@@ -141,8 +146,8 @@
 					</div>
 				</div>
 			</div> --}}
-		</div>
+		{{-- </div>
 	</div>
-</section> --}}
+</section>  --}}
 
 @endsection
