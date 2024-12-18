@@ -4,7 +4,6 @@
     <!-- Form Start -->
     <div class="container-fluid pt-4 px-4">
         <br/>
-        
         <div class="bg-light row g-4">
             <div class="col-sm-12 col-xl-6">
                 <div class="rounded h-100 p-4">
@@ -63,5 +62,5 @@
 
         </div>
     </div>
-    <!-- Form End -->
+
 @endsection

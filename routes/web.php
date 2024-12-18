@@ -22,6 +22,8 @@ Route::get('/blogs',[HomeController::class,'blogs'])->name('frontend.blogs');
 Route::get('/blogs/{id}', [HomeController::class, 'blogDetail'])->name('frontend.blogs.detail');
 Route::get('/blog-sidebar',[HomeController::class,'blogSidebar'])->name('frontend.blog-sidebar');
 Route::get('/events',[HomeController::class,'events'])->name('frontend.events');
+Route::get('/events/{id}',[HomeController::class,'eventsDetail'])->name('frontend.events.detail');
+
 
 Route::get('/blog-single',[HomeController::class,'blogSingle'])->name('frontend.blog-single');
 Route::match(['GET', 'POST'],'/contact',[HomeController::class,'contact'])->name('frontend.contact');
