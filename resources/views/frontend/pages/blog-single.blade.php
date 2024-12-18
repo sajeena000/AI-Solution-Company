@@ -71,8 +71,6 @@
 								</div>
 							</a>
 							@endif
-
-
 						</div>
 					</div>
 				</div>
