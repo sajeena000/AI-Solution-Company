@@ -28,7 +28,7 @@ class sendInquiryEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Inquiry Email',
+            subject: 'Thank You for Reaching Out to AI-Solution!',
         );
     }
 

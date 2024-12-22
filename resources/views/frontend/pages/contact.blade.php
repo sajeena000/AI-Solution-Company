@@ -92,13 +92,13 @@
 
 					<ul class="address-block list-unstyled">
 						<li>
-							<i class="ti-direction mr-3"></i>North Main Street,Brooklyn Australia
+							<i class="ti-direction mr-3"></i>Pokhara, Nepal
 						</li>
 						<li>
-							<i class="ti-email mr-3"></i>Email: contact@mail.com
+							<i class="ti-email mr-3"></i>Email: sajeenamalla000@gmail.com
 						</li>
 						<li>
-							<i class="ti-mobile mr-3"></i>Phone:+88 01672 506 744
+							<i class="ti-mobile mr-3"></i>Phone:+977-9817183924
 						</li>
 					</ul>
 

@@ -100,7 +100,7 @@
             <div class="form-container">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <a href="index.html" class="">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Dashboard</h3>
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Admin Dashboard</h3>
                     </a>
                     <h3>Sign In</h3>
                 </div>

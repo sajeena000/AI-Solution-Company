@@ -111,13 +111,28 @@
 
     .chat_box {
         position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 10px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
         z-index: 50;
-        justify-self: end;
-        align-self: end;
         display: flex;
+        align-items:flex-end;
+        gap:10px;
+    }
+    .chat_box textarea{
+        padding:8px;
+        flex-grow: 1;
+        border-radius: 8px;
+    }
+
+    .chat_box button{
+        border:none;
+        outline: none;
+        padding:8px 16px;
+        border-radius: 8px;
+        font-size:16px;
+        background-color: rgb(96, 2, 162);
+        color:white;
     }
 
     .chat_body .bot_reply {
@@ -151,13 +166,13 @@
                 Bot: How can I assist you today?
             </div>
 
-            <div class="user_reply">
+            {{-- <div class="user_reply">
                 Me: How can I assist you today?
-            </div>
+            </div> --}}
         </div>
 
         <div class="chat_box">
-            <textarea id="chat_textarea"></textarea>
+            <textarea id="chat_textarea" rows="4"></textarea>
 
             <button id="send_button">Send</button>
         </div>
@@ -189,6 +204,7 @@
             return alert("Please type some thing.");
         }
 
+        chatTextarea.value = "";
         const userDiv = document.createElement('div');
         userDiv.innerHTML = `<div class="user_reply">Me: ${query}</div>`;
         messageContainer.append(userDiv);

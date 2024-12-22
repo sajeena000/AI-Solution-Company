@@ -82,7 +82,25 @@
     </div>
     <!-- Table End -->
 
-<script>
+<!-- Include CKEditor -->
+<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
 
+<script>
+    // Initialize CKEditor for all textareas with IDs starting with "message"
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('textarea[id^="message"]').forEach(function (textarea) {
+            CKEDITOR.replace(textarea.id, {
+                toolbar: [
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+                    { name: 'insert', items: ['Link'] },
+                    { name: 'styles', items: ['Format'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'undo', items: ['Undo', 'Redo'] }
+                ],
+                height: 300
+            });
+        });
+    });
 </script>
 @endsection
