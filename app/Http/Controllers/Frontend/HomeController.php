@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\Contact;
 use App\Models\Event;
 use App\Models\Project;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -109,19 +110,108 @@ class HomeController extends Controller
 
     public function chatResponse(Request $request)
     {
-        $contents = File::get(database_path('data\chatDataset.json'));
-        $data = json_decode(json: $contents, associative: true);
+        try {
+            $contents = File::get(database_path('data/chatDataset.json'));
+            $dataset = json_decode($contents, true);
+            $query = strtolower(trim($request->get('query')));
 
-        $query = $request->get('query');
-        $answer = '';
-
-        foreach ($data as $item) {
-            if (strtolower($item['query']) == strtolower($query)) {
-                $answer = $item['response'];
-                break;
+            if (empty($query)) {
+                return response()->json(['message' => 'Query cannot be empty'], 400);
             }
+
+            // Initialize best match tracking
+            $bestMatch = [
+                'response' => null,
+                'similarity' => 0,
+            ];
+
+            // Helper function for similarity calculation
+            $calculateSimilarity = function ($str1, $str2) {
+                $str1 = strtolower(trim($str1));
+                $str2 = strtolower(trim($str2));
+
+                // Exact match
+                if ($str1 === $str2) {
+                    return 1.0;
+                }
+
+                // One string contains the other
+                if (str_contains($str1, $str2) || str_contains($str2, $str1)) {
+                    return 0.8;
+                }
+
+                // Calculate word match similarity
+                $words1 = array_filter(explode(' ', $str1), fn($word) => strlen($word) > 1);
+                $words2 = array_filter(explode(' ', $str2), fn($word) => strlen($word) > 1);
+
+                $matchingWords = array_intersect($words1, $words2);
+                if (!empty($matchingWords)) {
+                    return count($matchingWords) / max(count($words1), count($words2));
+                }
+
+                // Levenshtein distance as fallback
+                $levDistance = levenshtein($str1, $str2);
+                $maxLength = max(strlen($str1), strlen($str2));
+                return $maxLength > 0 ? 1.0 - $levDistance / $maxLength : 0.0;
+            };
+
+            // Process each item in dataset
+            foreach ($dataset as $item) {
+                $similarity = $calculateSimilarity($query, $item['query']);
+
+                if ($similarity > $bestMatch['similarity']) {
+                    $bestMatch = [
+                        'response' => $item['response'],
+                        'similarity' => $similarity,
+                    ];
+                }
+            }
+
+            // Threshold for accepting a match
+            $similarityThreshold = 0.6;
+
+            // Return appropriate response
+            if ($bestMatch['similarity'] >= $similarityThreshold) {
+                return response()->json(
+                    [
+                        'data' => $bestMatch['response'],
+                        'confidence' => round($bestMatch['similarity'] * 100, 2),
+                    ],
+                    200,
+                );
+            }
+
+            // Check for common greetings if no good match found
+            $commonGreetings = ['hi', 'hello', 'hey', 'good'];
+            foreach ($commonGreetings as $greeting) {
+                if (str_starts_with($query, $greeting)) {
+                    return response()->json(
+                        [
+                            'data' => 'Hello! How can I assist you today?',
+                            'confidence' => 70,
+                        ],
+                        200,
+                    );
+                }
+            }
+
+            // Fallback response
+            return response()->json(
+                [
+                    'data' => "I'm not sure I understand. Could you please rephrase that?",
+                    'confidence' => 0,
+                ],
+                200,
+            );
+        } catch (Exception $e) {
+            return response()->json(
+                [
+                    'message' => 'An error occurred while processing your request',
+                    'error' => $e->getMessage(),
+                ],
+                500,
+            );
         }
-        return response()->json($answer);
     }
 }
 

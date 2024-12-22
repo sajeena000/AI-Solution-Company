@@ -1,11 +1,9 @@
 <style>
-    /* Chat Head Styles */
     .chat_head {
         height: 60px;
         width: 60px;
         border-radius: 50%;
         background-color: rgb(255, 255, 255);
-        /* Updated color */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -18,20 +16,19 @@
         user-select: none;
         font-size: 24px;
         transition: transform 0.3s ease;
+        z-index: 100001;
     }
 
     .chat_head:hover {
         transform: scale(1.1);
     }
 
-    /* Add icon to the chat head */
     .chat_head img {
         width: 40px;
         height: 40px;
         border-radius: 50%;
     }
 
-    /* Chat Wrapper Styles */
     .chat_wrapper {
         position: fixed;
         bottom: 90px;
@@ -46,7 +43,6 @@
         overflow: hidden;
         animation: fadeIn 0.3s ease;
         background: linear-gradient(135deg, rgb(247, 87, 87), #e74c3c);
-        /* Updated Gradient */
     }
 
     @keyframes fadeIn {
@@ -61,14 +57,12 @@
         }
     }
 
-    /* Chat Header Styles */
     .chat_header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 12px;
         background-color: rgb(247, 87, 87);
-        /* Updated color */
         color: white;
         font-weight: bold;
     }
@@ -81,76 +75,96 @@
     .chat_header #chat_close {
         cursor: pointer;
         user-select: none;
-        font-size: 16px;
+        font-size: 24px;
         transition: color 0.3s ease;
+        line-height: 1;
     }
 
     .chat_header #chat_close:hover {
         color: #ffe4e1;
-        /* Light coral */
     }
 
-    /* Chat Body Styles */
     .chat_body {
-        position: relative;
-        padding: 16px;
-        background-color: #ffe4e1;
-        /* Light coral */
         height: calc(100% - 56px);
-        overflow-y: auto;
-        font-family: Arial, sans-serif;
-        color: #333;
-        font-size: 14px;
+        background-color: #ffe4e1;
         display: flex;
         flex-direction: column;
     }
 
-    .chat_body p {
-        margin: 0;
+    #message_container {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 16px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    #message_container::-webkit-scrollbar {
+        display: none;
     }
 
     .chat_box {
-        position: absolute;
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
-        z-index: 50;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
         display: flex;
-        align-items:flex-end;
-        gap:10px;
-    }
-    .chat_box textarea{
-        padding:8px;
-        flex-grow: 1;
-        border-radius: 8px;
+        flex-direction: column;
+        gap: 8px;
     }
 
-    .chat_box button{
-        border:none;
-        outline: none;
-        padding:8px 16px;
+    .chat_box textarea {
+        padding: 12px;
         border-radius: 8px;
-        font-size:16px;
+        border: 1px solid #ddd;
+        resize: none;
+        font-family: inherit;
+        font-size: 14px;
+    }
+
+    .chat_box button {
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: none;
         background-color: rgb(96, 2, 162);
-        color:white;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
 
-    .chat_body .bot_reply {
-        display: flex;
-        justify-content: start;
+    .chat_box button:hover {
+        background-color: rgb(76, 2, 132);
     }
 
-    .chat_body .user_reply {
-        margin-top: 20px;
+    .reply {
+        max-width: 70%;
+        margin-bottom: 12px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        color: white;
+        word-wrap: break-word;
+    }
+
+    .bot_reply {
+        align-self: flex-start;
+        background-color: #e74c3c;
+        border-bottom-left-radius: 4px;
+    }
+
+    .user_reply {
+        align-self: flex-end;
+        background-color: #2c3e50;
+        border-bottom-right-radius: 4px;
+        margin-left: auto;
+    }
+
+    #message_container {
         display: flex;
-        justify-content: end;
+        flex-direction: column;
     }
 </style>
 
 <div class="chat_head" id="chat_head_trigger">
     <img src="{{ asset('frontend/images/chatbot/chat1.png') }}" alt="Chat Icon">
-
-
 </div>
 
 <div class="chat_wrapper" id="chat_wrapper">
@@ -160,23 +174,16 @@
     </div>
 
     <div class="chat_body">
-
         <div id="message_container">
-            <div class="bot_reply">
-                Bot: How can I assist you today?
+            <div class="bot_reply reply">
+                How can I assist you today?
             </div>
-
-            {{-- <div class="user_reply">
-                Me: How can I assist you today?
-            </div> --}}
         </div>
 
         <div class="chat_box">
-            <textarea id="chat_textarea" rows="4"></textarea>
-
+            <textarea id="chat_textarea" rows="3" placeholder="Type your message..."></textarea>
             <button id="send_button">Send</button>
         </div>
-
     </div>
 </div>
 
@@ -184,46 +191,60 @@
     const chatHeadTrigger = document.getElementById("chat_head_trigger");
     const chatWrapper = document.getElementById("chat_wrapper");
     const chatClose = document.getElementById("chat_close");
-
-    const messageContainer =  document.getElementById("message_container");
+    const messageContainer = document.getElementById("message_container");
     const chatTextarea = document.getElementById("chat_textarea");
     const sendButton = document.getElementById("send_button");
 
+    function scrollToBottom() {
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+
+    function addMessage(content, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `${isUser ? 'user_reply' : 'bot_reply'} reply`;
+        messageDiv.textContent = content;
+        messageContainer.appendChild(messageDiv);
+        scrollToBottom();
+    }
+
     chatHeadTrigger.addEventListener('click', () => {
         chatWrapper.style.display = "block";
+        scrollToBottom();
     });
 
     chatClose.addEventListener('click', () => {
         chatWrapper.style.display = "none";
     });
 
+    chatTextarea.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendButton.click();
+        }
+    });
 
     sendButton.addEventListener('click', async () => {
-        const query = chatTextarea.value;
-        if (query.length <= 0) {
-            return alert("Please type some thing.");
-        }
+        const query = chatTextarea.value.trim();
+        if (!query) return;
 
         chatTextarea.value = "";
-        const userDiv = document.createElement('div');
-        userDiv.innerHTML = `<div class="user_reply">Me: ${query}</div>`;
-        messageContainer.append(userDiv);
+        addMessage(query, true);
 
         try {
-            const response = await fetch(`{{ route('frontend.chat-response') }}?query=${query}`, {
-                headers: {
-                    Accept: 'application/json'
-                }
-            });
-            const answer = await response.json();
+            const response = await fetch(
+                `{{ route('frontend.chat-response') }}?query=${encodeURIComponent(query)}`, {
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                });
 
-            if (answer) {
-                const botDiv = document.createElement('div');
-                botDiv.innerHTML = `<div class="bot_reply">Bot: ${answer }</div>`;
-                messageContainer.append(botDiv);
-            }
+            const result = await response.json();
+            const answer = response.ok ? result.data : "Bot could not identify your request!";
+            addMessage(answer);
+
         } catch (err) {
-            throw err;
+            console.error(err);
+            addMessage("Sorry, something went wrong. Please try again later.");
         }
     });
 </script>
