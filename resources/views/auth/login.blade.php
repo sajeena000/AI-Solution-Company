@@ -137,7 +137,7 @@
                         <a href="">Forgot Password?</a>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Sign In</button>
-                    <p class="text-center mt-3 mb-0 text-light">Don't have an account? <a href="">Sign Up</a></p>
+                    {{-- <p class="text-center mt-3 mb-0 text-light">Don't have an account? <a href="">Sign Up</a></p> --}}
                 </form>
             </div>
         </div>

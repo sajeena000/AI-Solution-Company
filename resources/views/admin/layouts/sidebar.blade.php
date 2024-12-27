@@ -65,9 +65,14 @@
                 <div class="navbar-nav w-100">
                     <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i> Admin Dashboard</a>
                     <a href="{{ route('admin.contact') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i> Contacts</a>
-                    <a href="{{ route('admin.project') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i> Projects</a>
+                    <a href="{{ rout
+                    e('admin.project') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i> Projects</a>
                     <a href="{{ route('admin.blogs.index') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i> Blogs</a>
                     <a href="{{ route('admin.events.index') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i> Events</a>
+                    
+                    @if (auth()->user()->role == 'superadmin')
+                    <a href="{{ route('admin.users.index') }}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i> Users</a>
+                    @endif
 
 
                   

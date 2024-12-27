@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\EventController;
-
+use App\Http\Controllers\Auth\UserController;
 // use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +45,13 @@ Route::get('/chat-response', [HomeController::class, 'chatResponse'])->name('fro
 // Admin Routes - Protected by auth middleware
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+   Route::get('users', [UserController::class, 'index'])->name('users.index');
+   Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+   Route::post('users/store', [UserController::class, 'store'])->name('users.store');
+   Route::get('users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+   Route::put('users/update/{id}', [UserController::class, 'update'])->name('users.update');
+   Route::delete('users/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
 
    Route::get('contact', [ContactController::class, 'index'])->name('contact');
    Route::post('contact/send-email/{id}', [ContactController::class, 'sendMail'])->name('contact.send-email');

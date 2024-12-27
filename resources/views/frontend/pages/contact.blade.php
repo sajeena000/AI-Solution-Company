@@ -95,7 +95,7 @@
 							<i class="ti-direction mr-3"></i>Pokhara, Nepal
 						</li>
 						<li>
-							<i class="ti-email mr-3"></i>Email: sajeenamalla000@gmail.com
+							<i class="ti-email mr-3"></i>Email: innovation@ai-solution.com
 						</li>
 						<li>
 							<i class="ti-mobile mr-3"></i>Phone:+977-9817183924
@@ -120,7 +120,7 @@
 </section>
 
 <div class="google-map">
-	<div id="map" data-latitude="40.712776" data-longitude="-74.005974" data-marker="images/marker.png" data-marker-name="Megakit"></div>
+	<div id="map" data-latitude="28.2096" data-longitude="83.9856" data-marker="images/marker.png" data-marker-name="Pokhara, Nepal"></div>
 </div>
 
 @endsection

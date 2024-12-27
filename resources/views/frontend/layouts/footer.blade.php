@@ -7,10 +7,10 @@
             <h4 class="text-capitalize mb-4">Company</h4>
   
             <ul class="list-unstyled footer-menu lh-35">
-              <li><a href="about.html">Terms & Conditions</a></li>
-              <li><a href="about.html">Privacy Policy</a></li>
-              <li><a href="cobtact.html">Support</a></li>
-              <li><a href="cobtact.html">FAQ</a></li>
+              <li><a href="{{ route('frontend.about') }}">Terms & Conditions</a></li>
+              <li><a href="{{ route('frontend.about') }}">Privacy Policy</a></li>
+              <li><a href="{{ route('frontend.contact') }}">Support</a></li>
+              <li><a href="{{ route('frontend.contact') }}">FAQ</a></li>
             </ul>
           </div>
         </div>
@@ -19,10 +19,13 @@
             <h4 class="text-capitalize mb-4">Quick Links</h4>
   
             <ul class="list-unstyled footer-menu lh-35">
-              <li><a href="about.html">About</a></li>
-              <li><a href="service.html">Services</a></li>
+              <li><a href="{{ route('frontend.about') }}">About</a></li>
+
+              <li><a href="{{ route('frontend.service')}}">Services</a></li>
+              
+
               <li><a href="blog-grid.html">Our Blog</a></li>
-              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="{{ route('frontend.contact') }}">Contact Us</a></li>
             </ul>
           </div>
         </div>
@@ -41,10 +44,10 @@
         <div class="col-lg-3 col-sm-6">
           <div class="widget">
             <div class="logo mb-4">
-              <h3>AI<span>-Solutions.</span></h3>
+              <h3>AI<span>-Solution.</span></h3>
             </div>
-            <h6><a href="mailto:support@gmail.com">support@ai-solutions.com</a></h6>
-            <a href="tel:+23-345-67890"><span class="text-color h4">+23-456-6588</span></a>
+            <h6><a href="mailto:support@gmail.com">innovation@ai-solution.com</a></h6>
+            <a href="tel:+23-345-67890"><span class="text-color h4">+977 9817183924</span></a>
           </div>
         </div>
       </div>
@@ -54,7 +57,7 @@
           <div class="col-lg-6">
             <div class="copyright">
               Copyright &copy; 2024, Designed &amp; Developed by <a href="https://themefisher.com/"
-                >AI-Solutions</a>
+                >AI-Solution</a>
             </div>
           </div>
           <div class="col-lg-6 text-left text-lg-right">

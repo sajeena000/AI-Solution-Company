@@ -184,7 +184,7 @@
 					<span class="h6 text-color">Transform Your Business Today</span>
 					<h2 class="mt-2 mb-4">Partner with Our Experts to Innovate and Grow</h2>
 					<p class="lead mb-4">Ready to integrate AI into your business? Contact us now to get started.</p>
-					<h3><i class="ti-mobile mr-3 text-color"></i>+23 876 65 455</h3>
+					<h3><i class="ti-mobile mr-3 text-color"></i>+977 9817183924</h3>
 				</div>
 			</div>
 		</div>
@@ -272,7 +272,7 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-4 col-md-6 mb-5">
 				<div class="card bg-transparent border-0">
-					<img loading="lazy" src="{{ asset('frontend/images/blog/1.jpg')}}" alt="blog" class="img-fluid rounded">
+					<img loading="lazy" src="{{ asset('frontend/images/blog/12.jpeg')}}" alt="blog" class="img-fluid rounded">
 
 					<div class="card-body mt-2">
 						<div class="blog-item-meta">
@@ -290,7 +290,7 @@
 
 			<div class="col-lg-4 col-md-6 mb-5">
 				<div class="card border-0 bg-transparent">
-					<img loading="lazy" src="{{ asset('frontend/images/blog/2.jpg')}}" alt="blog" class="img-fluid rounded">
+					<img loading="lazy" src="{{ asset('frontend/images/blog/11.jpg')}}" alt="blog" class="img-fluid rounded">
 
 					<div class="card-body mt-2">
 						<div class="blog-item-meta">
@@ -309,16 +309,16 @@
 
 			<div class="col-lg-4 col-md-6 mb-5">
 				<div class="card border-0 bg-transparent">
-					<img loading="lazy" src="{{ asset('frontend/images/blog/3.jpg')}}" alt="blog" class="img-fluid rounded">
+					<img loading="lazy" src="{{ asset('frontend/images/blog/13.jpeg')}}" alt="blog" class="img-fluid rounded">
 
 					<div class="card-body mt-2">
 						<div class="blog-item-meta">
-							<a href="#" class="text-white-50">AI for Businesses<span class="ml-2 mr-2">/</span></a>
-							<a href="#" class="text-white-50">Tech Insights<span class="ml-2">/</span></a>
+							<a href="#" class="text-white-50">AI Integration<span class="ml-2 mr-2">/</span></a>
+							<a href="#" class="text-white-50">Future Tech<span class="ml-2">/</span></a>
 							<a href="#" class="text-white-50 ml-2"><i class="fa fa-user mr-2"></i>admin</a>
 						</div>
 
-						<h3 class="mt-3 mb-5 lh-36"><a href="#" class="text-white">Boosting Efficiency with AI Automation</a></h3>
+						<h3 class="mt-3 mb-5 lh-36"><a href="#" class="text-white">Embracing AI for a Smarter Workforce</a></h3>
 
 						<a href="blog-single.html" class="btn btn-small btn-solid-border btn-round-full text-white">Learn More</a>
 					</div>

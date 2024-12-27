@@ -170,7 +170,7 @@
 						</div>
 					</div>
 					<div class="team-item-content">
-						<h4 class="mt-3 mb-0 text-capitalize">Peter Parker</h4>
+						<h4 class="mt-3 mb-0 text-capitalize">Prashant Gurung</h4>
 						<p>Chief Technology Officer</p>
 					</div>
 				</div>
@@ -198,7 +198,7 @@
 						</div>
 					</div>
 					<div class="team-item-content">
-						<h4 class="mt-3 mb-0 text-capitalize">Harry Styles</h4>
+						<h4 class="mt-3 mb-0 text-capitalize">Himal Malla</h4>
 						<p>Head of Product Development</p>
 					</div>
 				</div>
@@ -225,7 +225,7 @@
 						</div>
 					</div>
 					<div class="team-item-content">
-						<h4 class="mt-3 mb-0 text-capitalize">David Williams</h4>
+						<h4 class="mt-3 mb-0 text-capitalize">Tapendra Malla</h4>
 						<p>Senior Marketer</p>
 					</div>
 				</div>
@@ -253,7 +253,7 @@
 						</div>
 					</div>
 					<div class="team-item-content">
-						<h4 class="mt-3 mb-0 text-capitalize">Peter Odin</h4>
+						<h4 class="mt-3 mb-0 text-capitalize">Sudarshan Malla</h4>
 						<p>AI Specialist</p>
 					</div>
 				</div>
@@ -281,7 +281,7 @@
 						</div>
 					</div>
 					<div class="team-item-content">
-						<h4 class="mt-3 mb-0 text-capitalize">Primrose Holland</h4>
+						<h4 class="mt-3 mb-0 text-capitalize">Binita Gurung</h4>
 						<p>Project Manager</p>
 					</div>
 				</div>
@@ -308,7 +308,7 @@
 			<div class="testimonial-author">
 
 			  <img src="{{ asset('frontend/images/team/client1.jpg')}}" alt="Client 1" class="img-fluid rounded-circle">
-			  <h5 class="mb-0">Sudarshan Malla</h5>
+			  <h5 class="mb-0">Robert John Downey Jr.</h5>
 			  <p>Managing Director, NLPRC</p>
 			</div>
 			<p>AI-Solutions has revolutionized our workplace by integrating cutting-edge AI technologies. Their virtual assistant and affordable prototyping services have significantly enhanced our team’s productivity and efficiency.</p>
@@ -323,7 +323,7 @@
 			<div class="testimonial-author">
 				<img src="{{ asset('frontend/images/team/client2.jpg')}}" alt="Client 1" class="img-fluid rounded-circle">
 
-			  <h5 class="mb-0">Diya Pradhan</h5>
+			  <h5 class="mb-0">Lily Collins</h5>
 			  <p>Chairman, NIMS Group Clinic Pvt. Ltd.</p>
 			</div>
 			<p>Thanks to AI-Solutions, we were able to prototype and implement AI solutions faster than we ever expected. Their team is dedicated to providing innovative solutions that truly meet the needs of modern businesses.</p>
@@ -338,7 +338,7 @@
 			<div class="testimonial-author">
 				<img src="{{ asset('frontend/images/team/client3.jpg')}}" alt="Client 1" class="img-fluid rounded-circle">
 
-			  <h5 class="mb-0">Himal Malla</h5>
+			  <h5 class="mb-0">Chris Hemsworth</h5>
 			  <p>Founder/CEO, Parichaya</p>
 			</div>
 			<p>Working with AI-Solutions has enhanced our efficiency and user experience. The affordable AI prototypes helped us scale our operations quickly.</p>
@@ -355,7 +355,7 @@
 			<div class="testimonial-author">
 				<img src="{{ asset('frontend/images/team/client4.jpg')}}" alt="Client 1" class="img-fluid rounded-circle">
 
-			  <h5 class="mb-0">Sangharsa Shah</h5>
+			  <h5 class="mb-0">Chris Evans</h5>
 			  <p>CEO, Tech Innovators</p>
 			</div>
 			<p>AI-Solutions has revolutionized our workplace by integrating cutting-edge AI technologies. Their virtual assistant and affordable prototyping services have significantly enhanced our team’s productivity...</p>
@@ -370,7 +370,7 @@
 			<div class="testimonial-author">
 				<img src="{{ asset('frontend/images/team/client5.jpg')}}" alt="Client 1" class="img-fluid rounded-circle">
 
-			  <h5 class="mb-0">Christopher Nolan</h5>
+			  <h5 class="mb-0">Cillian Murphy</h5>
 			  <p>CTO, Digital Enterprises</p>
 			</div>
 			<p>Thanks to AI-Solutions, we were able to prototype and implement AI solutions faster than we ever expected...</p>
@@ -385,7 +385,7 @@
 			<div class="testimonial-author">
 				<img src="{{ asset('frontend/images/team/client6.jpg')}}" alt="Client 1" class="img-fluid rounded-circle">
 
-			  <h5 class="mb-0">Prayas Malla</h5>
+			  <h5 class="mb-0">Andrew Garfield</h5>
 			  <p>CEO, Tech Innovators</p>
 			</div>
 			<p>AI-Solutions transformed our digital work environment. Their AI-powered virtual assistant and prototyping tools have been game-changers for us...</p>
