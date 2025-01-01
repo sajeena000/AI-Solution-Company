@@ -15,28 +15,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{ asset('admin/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('admin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('admin/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{ asset('admin/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.3.2/ckeditor.js" integrity="sha512-dChQkpVHM53sBTfhGA2O+4GSNA6L2Sc2r2CJrc4RjNPyKkuDFX5ZgxiW8O4li8IlUyZCCVMLiNwtpzrIz8vIqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.3.2/ckeditor.js"
+        integrity="sha512-dChQkpVHM53sBTfhGA2O+4GSNA6L2Sc2r2CJrc4RjNPyKkuDFX5ZgxiW8O4li8IlUyZCCVMLiNwtpzrIz8vIqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
     <div class="container-fluid position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -52,8 +55,11 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="img/user2.png" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        <img class="rounded-circle" src="img/user2.png" alt=""
+                            style="width: 40px; height: 40px;">
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">{{ Auth::user()->name }}</h6>
@@ -62,42 +68,66 @@
                 </div>
 
 
+                @php
+                    $permissions = \App\Models\Role::where('id', auth()->user()->role_id)
+                        ->first()
+                        ->permissions->pluck('name')
+                        ->toArray();
+                @endphp
+
                 <div class="navbar-nav w-100">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link">
-                        <i class="fa fa-home me-2"></i> Admin Dashboard
-                    </a>
-                    <a href="{{ route('admin.contact') }}" class="nav-item nav-link">
-                        <i class="fa fa-address-book me-2"></i> Contacts
-                    </a>
-                    <a href="{{ route('admin.feedback.index') }}" class="nav-item nav-link">
-                        <i class="fa fa-comments me-2"></i> Feedback
-                    </a>
-                    <a href="{{ route('admin.project') }}" class="nav-item nav-link">
-                        <i class="fa fa-tasks me-2"></i> Projects
-                    </a>
-                    <a href="{{ route('admin.blogs.index') }}" class="nav-item nav-link">
-                        <i class="fa fa-newspaper me-2"></i> Blogs
-                    </a>
-                    <a href="{{ route('admin.events.index') }}" class="nav-item nav-link">
-                        <i class="fa fa-calendar me-2"></i> Events
-                    </a>
-                    
-                    @if (auth()->user()->role == 'superadmin')
-                    <a href="{{ route('admin.users.index') }}" class="nav-item nav-link">
-                        <i class="fa fa-users me-2"></i> Users
-                    </a>
+                    @if (in_array('dashboard', $permissions))
+                        <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link">
+                            <i class="fa fa-home me-2"></i> Admin Dashboard
+                        </a>
                     @endif
-                
-                  
-                    <a href="{{ route('admin.role.index') }}" class="nav-item nav-link">
-                        <i class="fa fa-users me-2"></i> Roles
-                    </a>
-             
-                
-                
 
 
-                  
+                    @if (in_array('manage_contacts', $permissions))
+                        <a href="{{ route('admin.contact') }}" class="nav-item nav-link">
+                            <i class="fa fa-address-book me-2"></i> Contacts
+                        </a>
+                    @endif
+
+                    @if (in_array('manage_contacts', $permissions))
+                        <a href="{{ route('admin.feedback.index') }}" class="nav-item nav-link">
+                            <i class="fa fa-comments me-2"></i> Feedback
+                        </a>
+                    @endif
+
+                    @if (in_array('manage_contacts', $permissions))
+                        <a href="{{ route('admin.project') }}" class="nav-item nav-link">
+                            <i class="fa fa-tasks me-2"></i> Projects
+                        </a>
+                    @endif
+
+                    @if (in_array('manage_blogs', $permissions))
+                        <a href="{{ route('admin.blogs.index') }}" class="nav-item nav-link">
+                            <i class="fa fa-newspaper me-2"></i> Blogs
+                        </a>
+                    @endif
+
+                    @if (in_array('manage_events', $permissions))
+                        <a href="{{ route('admin.events.index') }}" class="nav-item nav-link">
+                            <i class="fa fa-calendar me-2"></i> Events
+                        </a>
+                    @endif
+
+
+                    @if (in_array('manage_contacts', $permissions))
+                        <a href="{{ route('admin.users.index') }}" class="nav-item nav-link">
+                            <i class="fa fa-users me-2"></i> Users
+                        </a>
+                        <a href="{{ route('admin.role.index') }}" class="nav-item nav-link">
+                            <i class="fa fa-users me-2"></i> Roles
+                        </a>
+                    @endif
+
+
+
+
+
+
 
                     {{-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
@@ -118,7 +148,7 @@
                             <a href="signup.html" class="dropdown-item">Sign Up</a>
                             <a href="{{ route('admin.404') }}" class="dropdown-item">404 Error</a>
                             <a href="{{ route('admin.blank') }}" class="dropdown-item">Blank Page</a> --}}
-                        {{-- </div>
+                    {{-- </div>
                     </div> --}}
                 </div>
             </nav>
@@ -148,7 +178,8 @@
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -158,7 +189,8 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -168,7 +200,8 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -205,13 +238,15 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user2.png" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle me-lg-2" src="img/user2.png" alt=""
+                                style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">{{ Auth::user()->name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
-                            <a class="dropdown-item" onclick="document.getElementById('logoutForm').submit()">Log Out</a>
+                            <a class="dropdown-item" onclick="document.getElementById('logoutForm').submit()">Log
+                                Out</a>
                             <form action="{{ route('logout') }}" method="POST" id="logoutForm"> @csrf</form>
                         </div>
                     </div>

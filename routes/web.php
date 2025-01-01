@@ -47,54 +47,68 @@ Route::get('/chat-response', [HomeController::class, 'chatResponse'])->name('fro
 
 // Admin Routes - Protected by auth middleware
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-   Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-   Route::get('users', [UserController::class, 'index'])->name('users.index');
-   Route::get('users/create', [UserController::class, 'create'])->name('users.create');
-   Route::post('users/store', [UserController::class, 'store'])->name('users.store');
-   Route::get('users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-   Route::put('users/update/{id}', [UserController::class, 'update'])->name('users.update');
-   Route::delete('users/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
+   Route::middleware('permission:view_dashboard')->group(function () {
+      Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+   });
 
-   Route::get('role', [RoleController::class, 'index'])->name('role.index');
-   Route::get('role/create', [RoleController::class, 'create'])->name('role.create');
-   Route::post('role/store', [RoleController::class, 'store'])->name('role.store');
-   Route::get('role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
-   Route::put('role/user-role/{id}', [RoleController::class, 'userRole'])->name('role.user-role');
-   Route::delete('role/delete/{id}', [RoleController::class, 'destroy'])->name('role.delete');
+   Route::middleware('permission:manage_users')->group(function () {
+      Route::get('users', [UserController::class, 'index'])->name('users.index');
+      Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+      Route::post('users/store', [UserController::class, 'store'])->name('users.store');
+      Route::get('users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+      Route::put('users/update/{id}', [UserController::class, 'update'])->name('users.update');
+      Route::delete('users/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
 
-   Route::get('contact', [ContactController::class, 'index'])->name('contact');
-   Route::post('contact/send-email/{id}', [ContactController::class, 'sendMail'])->name('contact.send-email');
-   Route::delete('contact/delete/{id}', [ContactController::class, 'destroy'])->name('contact.delete');
-
-   Route::get('feedback', [FeedbackController::class, 'index'])->name('feedback.index');
-   Route::get('feedback/show/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
-   Route::delete('feedback/delete/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
+      Route::get('role', [RoleController::class, 'index'])->name('role.index');
+      Route::get('role/create', [RoleController::class, 'create'])->name('role.create');
+      Route::post('role/store', [RoleController::class, 'store'])->name('role.store');
+      Route::get('role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+      Route::put('role/user-role/{id}', [RoleController::class, 'userRole'])->name('role.user-role');
+      Route::delete('role/delete/{id}', [RoleController::class, 'destroy'])->name('role.delete');
+   });
 
 
-
-   Route::get('project', [ProjectController::class, 'index'])->name('project');
-   Route::get('project/create', [ProjectController::class, 'create'])->name('project.create');
-   Route::post('project/store', [ProjectController::class, 'store'])->name('project.store');
-   Route::get('project/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
-   Route::put('project/update/{id}', [ProjectController::class, 'update'])->name('project.update');
-   Route::delete('project/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
+   Route::middleware('permission:manage_contacts')->group(function () {
+      Route::get('contact', [ContactController::class, 'index'])->name('contact');
+      Route::post('contact/send-email/{id}', [ContactController::class, 'sendMail'])->name('contact.send-email');
+      Route::delete('contact/delete/{id}', [ContactController::class, 'destroy'])->name('contact.delete');
+   });
 
 
-   Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
-   Route::get('blogs/create', [BlogController::class, 'create'])->name('blogs.create');
-   Route::post('blogs/store', [BlogController::class, 'store'])->name('blogs.store');
-   Route::get('blogs/edit/{id}', [BlogController::class, 'edit'])->name('blogs.edit');
-   Route::put('blogs/update/{id}', [BlogController::class, 'update'])->name('blogs.update');
-   Route::delete('blogs/delete/{id}', [BlogController::class, 'destroy'])->name('blogs.delete');
+   Route::middleware('permission:manage_feedbacks')->group(function () {
+      Route::get('feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+      Route::get('feedback/show/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
+      Route::delete('feedback/delete/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
+   });
 
-   Route::get('events', [EventController::class, 'index'])->name('events.index');
-   Route::get('events/create', [EventController::class, 'create'])->name('events.create');
-   Route::post('events/store', [EventController::class, 'store'])->name('events.store');
-   Route::get('events/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
-   Route::put('events/update/{id}', [EventController::class, 'update'])->name('events.update');
-   Route::delete('events/delete/{id}', [EventController::class, 'destroy'])->name('events.delete');
 
+   Route::middleware('permission:manage_projects')->group(function () {
+      Route::get('project', [ProjectController::class, 'index'])->name('project');
+      Route::get('project/create', [ProjectController::class, 'create'])->name('project.create');
+      Route::post('project/store', [ProjectController::class, 'store'])->name('project.store');
+      Route::get('project/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
+      Route::put('project/update/{id}', [ProjectController::class, 'update'])->name('project.update');
+      Route::delete('project/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
+   });
+
+   Route::middleware('permission:manage_blogs')->group(function () {
+      Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
+      Route::get('blogs/create', [BlogController::class, 'create'])->name('blogs.create');
+      Route::post('blogs/store', [BlogController::class, 'store'])->name('blogs.store');
+      Route::get('blogs/edit/{id}', [BlogController::class, 'edit'])->name('blogs.edit');
+      Route::put('blogs/update/{id}', [BlogController::class, 'update'])->name('blogs.update');
+      Route::delete('blogs/delete/{id}', [BlogController::class, 'destroy'])->name('blogs.delete');
+   });
+
+   Route::middleware('permission:manage_events')->group(function () {
+      Route::get('events', [EventController::class, 'index'])->name('events.index');
+      Route::get('events/create', [EventController::class, 'create'])->name('events.create');
+      Route::post('events/store', [EventController::class, 'store'])->name('events.store');
+      Route::get('events/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
+      Route::put('events/update/{id}', [EventController::class, 'update'])->name('events.update');
+      Route::delete('events/delete/{id}', [EventController::class, 'destroy'])->name('events.delete');
+   });
 
    Route::get('widget', [DashboardController::class, 'widget'])->name('widget');
    Route::get('button', [DashboardController::class, 'button'])->name('button');

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
+
     public function index()
     {
         
