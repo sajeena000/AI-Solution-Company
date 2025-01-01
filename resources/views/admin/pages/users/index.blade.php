@@ -19,31 +19,50 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
                                     <th scope="col">Created at</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users as $user)
-                                <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->created_at ? date('M d, Y', strtotime($user->created_at)) : '-' }}</td>
-                                    <td>
-                                        
-                                        <div class="d-flex gap-2">
-                                            <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
-                                            @if ($user->role != 'superadmin')
-                                            <form  method="POST" action="{{ route('admin.users.delete', $user->id) }}">
-                                                @method('DELETE')
+                                @foreach ($users as $user)
+                                    <tr>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>
+                                            <form action="{{ route('admin.role.user-role', $user->id) }}" method="POST">
                                                 @csrf
-                                                <span onclick="handleDeleteConfirm(this.closest('form'))" class="text-danger" style="cursor:pointer">Delete</span>
+                                                @method('PUT')
+                                                <select class="form-control" name="role_id"
+                                                    onchange="this.closest('form').submit()">
+                                                    <option value="">--select--</option>
+                                                    @foreach ($roles as $role)
+                                                        <option value="{{ $role->id }}" @selected($user->role_id === $role->id)>{{ $role->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </form>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
+
+
+                                        </td>
+                                        <td>{{ $user->created_at ? date('M d, Y', strtotime($user->created_at)) : '-' }}
+                                        </td>
+                                        <td>
+
+                                            <div class="d-flex gap-2">
+                                                <a href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
+                                                @if ($user->role != 'superadmin')
+                                                    <form method="POST"
+                                                        action="{{ route('admin.users.delete', $user->id) }}">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <span onclick="handleDeleteConfirm(this.closest('form'))"
+                                                            class="text-danger" style="cursor:pointer">Delete</span>
+                                                    </form>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -54,7 +73,5 @@
     </div>
     <!-- Table End -->
 
-<script>
-
-</script>
+    <script></script>
 @endsection

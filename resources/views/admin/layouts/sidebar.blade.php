@@ -88,6 +88,12 @@
                     </a>
                     @endif
                 
+                  
+                    <a href="{{ route('admin.role.index') }}" class="nav-item nav-link">
+                        <i class="fa fa-users me-2"></i> Roles
+                    </a>
+             
+                
                 
 
 

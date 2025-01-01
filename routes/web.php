@@ -9,24 +9,25 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Auth\UserController;
 // use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
 
 // frontend routes 
-Route::get('/',[HomeController::class,'index'])->name('frontend.home');
-Route::get('/about',[HomeController::class,'about'])->name('frontend.about');
-Route::get('/pricing',[HomeController::class,'pricing'])->name('frontend.pricing');
-Route::get('/service',[HomeController::class,'service'])->name('frontend.service');
-Route::get('/gallery',[HomeController::class,'gallery'])->name('frontend.gallery');
+Route::get('/', [HomeController::class, 'index'])->name('frontend.home');
+Route::get('/about', [HomeController::class, 'about'])->name('frontend.about');
+Route::get('/pricing', [HomeController::class, 'pricing'])->name('frontend.pricing');
+Route::get('/service', [HomeController::class, 'service'])->name('frontend.service');
+Route::get('/gallery', [HomeController::class, 'gallery'])->name('frontend.gallery');
 
-Route::get('/project',[HomeController::class,'project'])->name('frontend.project'); //Portfolio
-Route::get('/blogs',[HomeController::class,'blogs'])->name('frontend.blogs');
+Route::get('/project', [HomeController::class, 'project'])->name('frontend.project'); //Portfolio
+Route::get('/blogs', [HomeController::class, 'blogs'])->name('frontend.blogs');
 Route::get('/blogs/{id}', [HomeController::class, 'blogDetail'])->name('frontend.blogs.detail');
-Route::get('/blog-sidebar',[HomeController::class,'blogSidebar'])->name('frontend.blog-sidebar');
-Route::get('/events',[HomeController::class,'events'])->name('frontend.events');
-Route::get('/events/{id}',[HomeController::class,'eventsDetail'])->name('frontend.events.detail');
+Route::get('/blog-sidebar', [HomeController::class, 'blogSidebar'])->name('frontend.blog-sidebar');
+Route::get('/events', [HomeController::class, 'events'])->name('frontend.events');
+Route::get('/events/{id}', [HomeController::class, 'eventsDetail'])->name('frontend.events.detail');
 
-Route::match(['GET', 'POST'],'/contact',[HomeController::class,'contact'])->name('frontend.contact');
-Route::post('/store-feedback',[HomeController::class,'storeFeedback'])->name('frontend.store-feedback');
+Route::match(['GET', 'POST'], '/contact', [HomeController::class, 'contact'])->name('frontend.contact');
+Route::post('/store-feedback', [HomeController::class, 'storeFeedback'])->name('frontend.store-feedback');
 
 // chat route 
 Route::get('/chat-response', [HomeController::class, 'chatResponse'])->name('frontend.chat-response');
@@ -55,13 +56,20 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
    Route::put('users/update/{id}', [UserController::class, 'update'])->name('users.update');
    Route::delete('users/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
 
+   Route::get('role', [RoleController::class, 'index'])->name('role.index');
+   Route::get('role/create', [RoleController::class, 'create'])->name('role.create');
+   Route::post('role/store', [RoleController::class, 'store'])->name('role.store');
+   Route::get('role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+   Route::put('role/user-role/{id}', [RoleController::class, 'userRole'])->name('role.user-role');
+   Route::delete('role/delete/{id}', [RoleController::class, 'destroy'])->name('role.delete');
+
    Route::get('contact', [ContactController::class, 'index'])->name('contact');
    Route::post('contact/send-email/{id}', [ContactController::class, 'sendMail'])->name('contact.send-email');
    Route::delete('contact/delete/{id}', [ContactController::class, 'destroy'])->name('contact.delete');
 
-   Route::get('feedback', [FeedbackController::class, 'index'])->name('feedback.index'); 
-   Route::get('feedback/show/{id}', [FeedbackController::class, 'show'])->name('feedback.show'); 
-   Route::delete('feedback/delete/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy'); 
+   Route::get('feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+   Route::get('feedback/show/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
+   Route::delete('feedback/delete/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
 
 
 
@@ -81,12 +89,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
    Route::delete('blogs/delete/{id}', [BlogController::class, 'destroy'])->name('blogs.delete');
 
    Route::get('events', [EventController::class, 'index'])->name('events.index');
-    Route::get('events/create', [EventController::class, 'create'])->name('events.create');
-    Route::post('events/store', [EventController::class, 'store'])->name('events.store');
-    Route::get('events/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
-    Route::put('events/update/{id}', [EventController::class, 'update'])->name('events.update');
-    Route::delete('events/delete/{id}', [EventController::class, 'destroy'])->name('events.delete');
- 
+   Route::get('events/create', [EventController::class, 'create'])->name('events.create');
+   Route::post('events/store', [EventController::class, 'store'])->name('events.store');
+   Route::get('events/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
+   Route::put('events/update/{id}', [EventController::class, 'update'])->name('events.update');
+   Route::delete('events/delete/{id}', [EventController::class, 'destroy'])->name('events.delete');
+
 
    Route::get('widget', [DashboardController::class, 'widget'])->name('widget');
    Route::get('button', [DashboardController::class, 'button'])->name('button');
@@ -99,7 +107,4 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
    Route::get('typography', [DashboardController::class, 'typography'])->name('typography');
 });
 
-require __DIR__.'/auth.php';
-
-
-
+require __DIR__ . '/auth.php';

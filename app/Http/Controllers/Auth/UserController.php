@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('name', 'ASC')->get();
-        return view('admin.pages.users.index', compact('users'));
+        $roles = Role::orderBy('name', 'ASC')->get();
+        return view('admin.pages.users.index', compact('users', 'roles'));
     }
 
     public function create()
