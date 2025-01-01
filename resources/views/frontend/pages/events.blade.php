@@ -43,11 +43,7 @@
                   alt="{{ $upcomingEvent->title }}" 
                   class="img-fluid rounded">
 
-				{{-- <img loading="lazy" 
-                     src="{{ $upcomingEvent->image ? Storage::url('events/' . $upcomingEvent->image) : asset('images/default-event.jpg') }}" 
-                     alt="{{ $upcomingEvent->title }}" 
-                     class="img-fluid rounded"> --}}
-				<div class="event-item-content bg-white p-4">
+				<div class="event-item-content bg-white">
 				  <div class="event-item-meta py-1 px-2">
 					<span class="text-muted text-capitalize mr-3">
 					  <i class="ti-calendar mr-2"></i>{{ \Carbon\Carbon::parse($upcomingEvent->date)->format('F d, Y') }}
@@ -56,11 +52,57 @@
 					  <i class="ti-location-pin mr-2"></i>{{ $upcomingEvent->location }}
 					</span>
 				  </div>
-				  <h3 class="mt-3 mb-3">
+				  <h5 class="mt-3 mb-3">
 					<a href="{{ route('frontend.events.detail', $upcomingEvent->slug ?? $upcomingEvent->id) }}">{{ $upcomingEvent->title }}</a>
-				  </h3>
+				  </h5>
 				  <p class="mb-4">{{ Str::limit($upcomingEvent->description, 100) }}</p>
 				  <a href="{{ route('frontend.events.detail', $upcomingEvent->slug ?? $upcomingEvent->id) }}" class="btn btn-small btn-main btn-round-full">Learn More</a>
+				</div>
+			  </div>
+			</div>
+			@endforeach
+		@endif
+	  </div>
+	</div>
+</section>
+
+<section class="section bg-white" style="padding:32px 0">
+	<div class="container">
+	  <div class="row justify-content-center mb-4">
+		<div class="col-lg-8 text-center">
+		  <div class="section-title">
+			<h2 class="mt-3 content-title">Our Past Events</h2>
+                    <p>Explore the highlights and memories from our successful past events!</p>
+                </div>
+		</div>
+	  </div>
+  
+	  <div class="row">
+		@if($pastEvents->isEmpty())
+			<p class="text-center w-100">No past pastEvents at the moment.</p>
+		@else
+			@foreach($pastEvents as $pastEvent)
+			<div class="col-lg-4 col-md-6 mb-5">
+			  <div class="event-item">
+				<img loading="lazy" 
+                 src="{{ Storage::url('events/' . $pastEvent->image) }}" 
+                  alt="{{ $pastEvent->title }}" 
+                  class="img-fluid rounded">
+
+				<div class="event-item-content bg-white">
+				  <div class="event-item-meta py-1 px-2">
+					<span class="text-muted text-capitalize mr-3">
+					  <i class="ti-calendar mr-2"></i>{{ \Carbon\Carbon::parse($pastEvent->date)->format('F d, Y') }}
+					</span>
+					<span class="text-muted text-capitalize">
+					  <i class="ti-location-pin mr-2"></i>{{ $pastEvent->location }}
+					</span>
+				  </div>
+				  <h5 class="mt-3 mb-3">
+					<a href="{{ route('frontend.events.detail', $pastEvent->slug ?? $pastEvent->id) }}">{{ $pastEvent->title }}</a>
+				  </h5>
+				  <p class="mb-4">{{ Str::limit($pastEvent->description, 100) }}</p>
+				  <a href="{{ route('frontend.events.detail', $pastEvent->slug ?? $pastEvent->id) }}" class="btn btn-small btn-main btn-round-full">Learn More</a>
 				</div>
 			  </div>
 			</div>

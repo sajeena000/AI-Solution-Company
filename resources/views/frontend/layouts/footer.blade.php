@@ -26,6 +26,7 @@
 
               <li><a href="blog-grid.html">Our Blog</a></li>
               <li><a href="{{ route('frontend.contact') }}">Contact Us</a></li>
+              <li><a href="#" data-bs-toggle="modal" data-bs-target="#feedbackForm">Feedback</a></li>
             </ul>
           </div>
         </div>

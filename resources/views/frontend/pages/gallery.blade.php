@@ -111,65 +111,65 @@
                 </div>
             </div>
 
-            {{-- <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img src="{{ asset('frontend/images/gallery/event1.jpg') }}" class="card-img-top" alt="Event 1">
+                    <img src="{{ asset('frontend/images/gallery/5.jpg') }}" class="card-img-top" alt="Event 1">
                     <div class="card-body text-center">
-                        <h5 class="card-title">AI Conference 2024</h5>
-                        <p class="card-text">Showcasing our AI-powered prototyping solutions.</p>
+                        <h5 class="card-title">Office Celebrations</h5>
+                        <p class="card-text">Celebrating milestones and achievements with our team.</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img src="{{ asset('frontend/images/gallery/event1.jpg') }}" class="card-img-top" alt="Event 1">
+                    <img src="{{ asset('frontend/images/gallery/6.jpg') }}" class="card-img-top" alt="Event 1">
                     <div class="card-body text-center">
-                        <h5 class="card-title">AI Conference 2024</h5>
-                        <p class="card-text">Showcasing our AI-powered prototyping solutions.</p>
+                        <h5 class="card-title">AI Hackathon</h5>
+                        <p class="card-text">Collaborating with innovators to solve complex challenges.</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img src="{{ asset('frontend/images/gallery/event1.jpg') }}" class="card-img-top" alt="Event 1">
+                    <img src="{{ asset('frontend/images/gallery/7.jpg') }}" class="card-img-top" alt="Event 1">
                     <div class="card-body text-center">
-                        <h5 class="card-title">AI Conference 2024</h5>
-                        <p class="card-text">Showcasing our AI-powered prototyping solutions.</p>
+                        <h5 class="card-title">Charity Event</h5>
+                        <p class="card-text">Making a positive impact through charitable initiatives.</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img src="{{ asset('frontend/images/gallery/event1.jpg') }}" class="card-img-top" alt="Event 1">
+                    <img src="{{ asset('frontend/images/gallery/8.jpeg') }}" class="card-img-top" alt="Event 1">
                     <div class="card-body text-center">
-                        <h5 class="card-title">AI Conference 2024</h5>
-                        <p class="card-text">Showcasing our AI-powered prototyping solutions.</p>
+                        <h5 class="card-title">Customer Success Meetup</h5>
+                        <p class="card-text">Engaging with our valued clients to discuss their success stories.</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img src="{{ asset('frontend/images/gallery/event1.jpg') }}" class="card-img-top" alt="Event 1">
+                    <img src="{{ asset('frontend/images/gallery/9.png') }}" class="card-img-top" alt="Event 1">
                     <div class="card-body text-center">
-                        <h5 class="card-title">AI Conference 2024</h5>
-                        <p class="card-text">Showcasing our AI-powered prototyping solutions.</p>
+                        <h5 class="card-title">Annual Innovation Summit</h5>
+                        <p class="card-text">Discussing the latest trends in AI technology and innovation.</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img src="{{ asset('frontend/images/gallery/event1.jpg') }}" class="card-img-top" alt="Event 1">
+                    <img src="{{ asset('frontend/images/gallery/10.jpg') }}" class="card-img-top" alt="Event 1">
                     <div class="card-body text-center">
-                        <h5 class="card-title">AI Conference 2024</h5>
-                        <p class="card-text">Showcasing our AI-powered prototyping solutions.</p>
+                        <h5 class="card-title">Tech Expo 2024</h5>
+                        <p class="card-text">Presenting our solutions at a global technology exposition.</p>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 

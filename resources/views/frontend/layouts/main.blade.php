@@ -10,6 +10,7 @@
 @endif
 
 @include('frontend.layouts.chat')
+@include('frontend.layouts.feedback-modal')
 
 @include('frontend.layouts.footer')
 

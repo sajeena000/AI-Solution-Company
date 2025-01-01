@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Auth\UserController;
 // use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\FeedbackController;
 use Illuminate\Support\Facades\Route;
 
 // frontend routes 
@@ -25,6 +26,7 @@ Route::get('/events',[HomeController::class,'events'])->name('frontend.events');
 Route::get('/events/{id}',[HomeController::class,'eventsDetail'])->name('frontend.events.detail');
 
 Route::match(['GET', 'POST'],'/contact',[HomeController::class,'contact'])->name('frontend.contact');
+Route::post('/store-feedback',[HomeController::class,'storeFeedback'])->name('frontend.store-feedback');
 
 // chat route 
 Route::get('/chat-response', [HomeController::class, 'chatResponse'])->name('frontend.chat-response');
@@ -56,7 +58,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
    Route::get('contact', [ContactController::class, 'index'])->name('contact');
    Route::post('contact/send-email/{id}', [ContactController::class, 'sendMail'])->name('contact.send-email');
    Route::delete('contact/delete/{id}', [ContactController::class, 'destroy'])->name('contact.delete');
-   
+
+   Route::get('feedback', [FeedbackController::class, 'index'])->name('feedback.index'); 
+   Route::get('feedback/show/{id}', [FeedbackController::class, 'show'])->name('feedback.show'); 
+   Route::delete('feedback/delete/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy'); 
+
+
 
    Route::get('project', [ProjectController::class, 'index'])->name('project');
    Route::get('project/create', [ProjectController::class, 'create'])->name('project.create');

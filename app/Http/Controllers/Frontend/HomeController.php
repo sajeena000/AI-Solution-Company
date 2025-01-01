@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Contact;
 use App\Models\Event;
+use App\Models\Feedback;
 use App\Models\Project;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -98,7 +100,8 @@ class HomeController extends Controller
     public function events()
     {
         $events = Event::where('date', '>=', now()->startOfDay())->orderBy('date', 'ASC')->get();
-        return view('frontend.pages.events', compact('events'));
+        $pastEvents = Event::where('date', '<', now()->startOfDay())->orderBy('date', 'ASC')->get();
+        return view('frontend.pages.events', compact('events', 'pastEvents'));
     }
 
     public function eventsDetail($id)
@@ -107,6 +110,34 @@ class HomeController extends Controller
         $upcomingEvents = Event::where('date', '>=', now()->startOfDay())->orderBy('date', 'ASC')->take(3)->get();
         return view('frontend.pages.event-single', compact('event', 'upcomingEvents'));
     }
+
+    public function storeFeedback(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'feedback-name' => 'required',
+            'feedback-email' => 'required|email',
+            'feedback-rating' => 'required|min:1|max:5',
+            'feedback-message' => 'required|max:1000',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->with(['trigger-feedback-form' => true])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $feedback = new Feedback();
+        $feedback->name = $request->input('feedback-name');
+        $feedback->email = $request->input('feedback-email');
+        $feedback->rating = $request->input('feedback-rating');
+        $feedback->message = $request->input('feedback-message');
+        $feedback->save();
+
+        Session::flash('success', 'Thank you for your feedback.');
+        return back();
+    }
+
 
     public function chatResponse(Request $request)
     {

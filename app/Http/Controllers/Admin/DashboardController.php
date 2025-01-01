@@ -3,12 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use App\Models\Event;
+use App\Models\Feedback;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index(){
-        return view('admin.dashboard.index');
+        $total_projects = Project::count();
+        $total_feedbacks = Feedback::count();
+        $total_blogs = Blog::count();
+        $total_events = Event::count();
+
+        $recent_feedbacks = Feedback::latest()->limit(10)->get();
+
+        return view('admin.dashboard.index', compact('total_projects', 'total_feedbacks', 'total_blogs', 'total_events', 'recent_feedbacks'));
     }
     public function widget(){
         return view('admin.pages.widget');
