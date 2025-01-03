@@ -69,14 +69,17 @@
 
 
                 @php
-                    $permissions = \App\Models\Role::where('id', auth()->user()->role_id)
-                        ->first()
-                        ->permissions->pluck('name')
-                        ->toArray();
+                    $role = \App\Models\Role::has('permissions')->where('id', auth()->user()->role_id)->first();
+                    if ($role) {
+                        $permissions = $role->permissions->pluck('name')->toArray();
+                    } else {
+                        $permissions = [];
+                    }
+
                 @endphp
 
                 <div class="navbar-nav w-100">
-                    @if (in_array('dashboard', $permissions))
+                    @if (in_array('view_dashboard', $permissions))
                         <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link">
                             <i class="fa fa-home me-2"></i> Admin Dashboard
                         </a>
@@ -89,13 +92,13 @@
                         </a>
                     @endif
 
-                    @if (in_array('manage_contacts', $permissions))
+                    @if (in_array('manage_feedbacks', $permissions))
                         <a href="{{ route('admin.feedback.index') }}" class="nav-item nav-link">
                             <i class="fa fa-comments me-2"></i> Feedback
                         </a>
                     @endif
 
-                    @if (in_array('manage_contacts', $permissions))
+                    @if (in_array('manage_projects', $permissions))
                         <a href="{{ route('admin.project') }}" class="nav-item nav-link">
                             <i class="fa fa-tasks me-2"></i> Projects
                         </a>
@@ -113,21 +116,14 @@
                         </a>
                     @endif
 
-
-                    @if (in_array('manage_contacts', $permissions))
-                        <a href="{{ route('admin.users.index') }}" class="nav-item nav-link">
-                            <i class="fa fa-users me-2"></i> Users
-                        </a>
-                        <a href="{{ route('admin.role.index') }}" class="nav-item nav-link">
-                            <i class="fa fa-users me-2"></i> Roles
-                        </a>
-                    @endif
-
-
-
-
-
-
+                    {{-- @if (in_array('manage_users', $permissions)) --}}
+                    <a href="{{ route('admin.users.index') }}" class="nav-item nav-link">
+                        <i class="fa fa-users me-2"></i> Users
+                    </a>
+                    <a href="{{ route('admin.role.index') }}" class="nav-item nav-link">
+                        <i class="fa fa-users me-2"></i> Roles
+                    </a>
+                    {{-- @endif --}}
 
                     {{-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>

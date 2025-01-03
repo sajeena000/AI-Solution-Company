@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <div class="block text-center">
           <span class="text-white">Our pricing</span>
-          <h1 class="text-capitalize mb-4 text-lg">AI Solutions Pricing</h1>
+          <h1 class="text-capitalize mb-4 text-lg">AI Solution Pricing</h1>
           <ul class="list-inline">
             <li class="list-inline-item"><a href="{{ route('frontend.home') }}" class="text-white">Home</a></li>
             <li class="list-inline-item"><span class="text-white">/</span></li>

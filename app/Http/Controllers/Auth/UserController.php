@@ -14,14 +14,18 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('name', 'ASC')->get();
+        $users = User::orderBy('name', 'ASC')
+            ->whereHas("role", function ($query) {
+                $query->whereNot("name", "Superadmin");
+            })->get();
         $roles = Role::orderBy('name', 'ASC')->get();
         return view('admin.pages.users.index', compact('users', 'roles'));
     }
 
     public function create()
     {
-        return view('admin.pages.users.create');
+        $roles = Role::orderBy('name', 'ASC')->whereNot("name", "Superadmin")->get();
+        return view('admin.pages.users.create', compact("roles"));
     }
 
     public function store(Request $request)
@@ -30,13 +34,14 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:4|confirmed',
+            'role_id' => 'required'
         ]);
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
-        $user->role = 'admin';
+        $user->role_id = $request->role_id;
         $user->save();
 
         return redirect()->route('admin.users.index');
@@ -45,7 +50,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.pages.users.edit', compact('user'));
+        $roles = Role::orderBy('name', 'ASC')->whereNot("name", "Superadmin")->get();
+        return view('admin.pages.users.edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, $id)

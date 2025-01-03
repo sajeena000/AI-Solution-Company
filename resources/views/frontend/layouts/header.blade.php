@@ -94,12 +94,12 @@
 
                     
                     <li class="dropdown dropdown-submenu dropright">
-                      <a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0301" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu</a>
+                      {{-- <a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0301" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu</a> --}}
             
-                      <ul class="dropdown-menu" aria-labelledby="dropdown0301">
+                      {{-- <ul class="dropdown-menu" aria-labelledby="dropdown0301">
                         <li><a class="dropdown-item" href="/">Submenu 01</a></li>
                         <li><a class="dropdown-item" href="/">Submenu 02</a></li>
-                      </ul>
+                      </ul> --}}
                     </li>
                   </ul>
                 </li>

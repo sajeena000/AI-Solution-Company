@@ -52,7 +52,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
       Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
    });
 
-   Route::middleware('permission:manage_users')->group(function () {
+   // Route::middleware('permission:manage_users')->group(function () {
       Route::get('users', [UserController::class, 'index'])->name('users.index');
       Route::get('users/create', [UserController::class, 'create'])->name('users.create');
       Route::post('users/store', [UserController::class, 'store'])->name('users.store');
@@ -66,7 +66,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
       Route::get('role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
       Route::put('role/user-role/{id}', [RoleController::class, 'userRole'])->name('role.user-role');
       Route::delete('role/delete/{id}', [RoleController::class, 'destroy'])->name('role.delete');
-   });
+   // });
 
 
    Route::middleware('permission:manage_contacts')->group(function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Role;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,16 @@ class CheckPermission
      */
     public function handle(Request $request, Closure $next, $permission): Response
     {
-        $permissions = \App\Models\Role::where('id', auth()->user()->role_id)
-        ->first()
-        ->permissions->pluck('name')
+        $role = Role::has('permissions')->where('id', auth()->user()->role_id)->first();
+
+        if(!$role){
+            return response()->json([
+                'message' => 'No role'
+            ], 403);
+        }
+
+
+        $permissions = $role->permissions->pluck('name')
         ->toArray();
 
         if (!in_array($permission, $permissions)) {

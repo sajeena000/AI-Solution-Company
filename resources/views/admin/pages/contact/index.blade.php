@@ -89,6 +89,7 @@
     // Initialize CKEditor for all textareas with IDs starting with "message"
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('textarea[id^="message"]').forEach(function (textarea) {
+            CKEDITOR.config.versionCheck = false;
             CKEDITOR.replace(textarea.id, {
                 toolbar: [
                     { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },

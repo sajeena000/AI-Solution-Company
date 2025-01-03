@@ -46,6 +46,20 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Confirm Password</label>
+                            <select class="form-control" name="role_id">
+                                <option value="">--Select Role--</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                            
+                            @error('role_id')
+                                <span class="text-danger">{{ $message }} </span>
+                            @enderror
+                        </div>
+
                     
 
 
